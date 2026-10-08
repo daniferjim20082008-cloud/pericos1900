@@ -1,31 +1,32 @@
-const teamImage='https://img.sofascore.com/api/v1/team/2814/image';
+const teamImage="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Crect width='320' height='320' rx='34' fill='%23eef5ff'/%3E%3Cpath d='M0 0h64v320H0zm128 0h64v320h-64zm128 0h64v320h-64z' fill='%230a55c7' opacity='.95'/%3E%3Ccircle cx='160' cy='160' r='82' fill='white' stroke='%2306162f' stroke-width='10'/%3E%3Ctext x='160' y='178' text-anchor='middle' font-family='Arial,sans-serif' font-size='52' font-weight='700' fill='%230a55c7'%3ERCDE%3C/text%3E%3C/svg%3E";
+const playerImage=id=>`https://images.weserv.nl/?url=img.sofascore.com%2Fapi%2Fv1%2Fplayer%2F${id}%2Fimage&w=360&h=360&fit=cover&output=webp`;
 const official='https://www.rcdespanyol.com/es/equipos/rcd-espanyol/1';
 const players=[
- {n:1,name:'Àngel Fortuño',pos:'Portero',sofa:'https://www.sofascore.com/es/football/player/angel-fortuno/1082734',photo:'https://img.sofascore.com/api/v1/player/1082734/image'},
- {n:13,name:'Dmitrović',pos:'Portero',sofa:'https://www.sofascore.com/es/football/player/marko-dmitrovic/94527',photo:'https://img.sofascore.com/api/v1/player/94527/image'},
- {n:2,name:'Gorosabel',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/andoni-gorosabel/866810',photo:'https://img.sofascore.com/api/v1/player/866810/image'},
- {n:3,name:'Quilindschy',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/quilindschy-hartman/1392044',photo:'https://img.sofascore.com/api/v1/player/1392044/image'},
- {n:5,name:'Riedel',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/clemens-riedel/1129360',photo:'https://img.sofascore.com/api/v1/player/1129360/image'},
- {n:6,name:'Cabrera',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/leandro-cabrera/81992',photo:'https://img.sofascore.com/api/v1/player/81992/image'},
- {n:14,name:'Nuñez',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/unai-nunez/892521',photo:'https://img.sofascore.com/api/v1/player/892521/image'},
- {n:16,name:'Drkušić',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/vanja-drkusic/908617',photo:'https://img.sofascore.com/api/v1/player/908617/image'},
- {n:21,name:'Hinojo',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/roger-hinojo/2065347',photo:'https://img.sofascore.com/api/v1/player/2065347/image'},
- {n:23,name:'El Hilali',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/omar-el-hilali/1064026',photo:'https://img.sofascore.com/api/v1/player/1064026/image'},
- {n:4,name:'Urko',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/urko-gonzalez/1064009',photo:'https://img.sofascore.com/api/v1/player/1064009/image'},
- {n:8,name:'Edu Expósito',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/edu-exposito/877262',photo:'https://img.sofascore.com/api/v1/player/877262/image'},
- {n:10,name:'Pol Lozano',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/pol-lozano/826010',photo:'https://img.sofascore.com/api/v1/player/826010/image'},
- {n:20,name:'Moscardo',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/gabriel-moscardo/1485309',photo:'https://img.sofascore.com/api/v1/player/1485309/image'},
- {n:22,name:'Cala',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/alex-calatrava/1136863',photo:'https://img.sofascore.com/api/v1/player/1136863/image'},
- {n:26,name:'Bauza',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/rafael-bauza/1841365',photo:'https://img.sofascore.com/api/v1/player/1841365/image'},
- {n:28,name:'Javi Hdez.',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/hernandez-javier/1514913',photo:'https://img.sofascore.com/api/v1/player/1514913/image'},
- {n:7,name:'Puado',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/javi-puado/891511',photo:'https://img.sofascore.com/api/v1/player/891511/image'},
- {n:9,name:'Roberto',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/roberto-fernandez/1392592',photo:'https://img.sofascore.com/api/v1/player/1392592/image'},
- {n:11,name:'Pere Milla',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/pere-milla/175185',photo:'https://img.sofascore.com/api/v1/player/175185/image'},
- {n:15,name:'Bryan',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/bryan-zaragoza/1084730',photo:'https://img.sofascore.com/api/v1/player/1084730/image'},
- {n:17,name:'Jofre',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/jofre/1019236',photo:'https://img.sofascore.com/api/v1/player/1019236/image'},
- {n:18,name:'Marcos',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/marcos-fernandez/1183542',photo:'https://img.sofascore.com/api/v1/player/1183542/image'},
- {n:19,name:'Kike G.',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/kike-garcia/84972',photo:'https://img.sofascore.com/api/v1/player/84972/image'},
- {n:24,name:'Dolan',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/tyrhys-dolan/1063015',photo:'https://img.sofascore.com/api/v1/player/1063015/image'}
+ {n:1,name:'Àngel Fortuño',pos:'Portero',sofa:'https://www.sofascore.com/es/football/player/angel-fortuno/1082734',photo:playerImage('1082734')},
+ {n:13,name:'Dmitrović',pos:'Portero',sofa:'https://www.sofascore.com/es/football/player/marko-dmitrovic/94527',photo:playerImage('94527')},
+ {n:2,name:'Gorosabel',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/andoni-gorosabel/866810',photo:playerImage('866810')},
+ {n:3,name:'Quilindschy',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/quilindschy-hartman/1392044',photo:playerImage('1392044')},
+ {n:5,name:'Riedel',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/clemens-riedel/1129360',photo:playerImage('1129360')},
+ {n:6,name:'Cabrera',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/leandro-cabrera/81992',photo:playerImage('81992')},
+ {n:14,name:'Nuñez',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/unai-nunez/892521',photo:playerImage('892521')},
+ {n:16,name:'Drkušić',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/vanja-drkusic/908617',photo:playerImage('908617')},
+ {n:21,name:'Hinojo',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/roger-hinojo/2065347',photo:playerImage('2065347')},
+ {n:23,name:'El Hilali',pos:'Defensa',sofa:'https://www.sofascore.com/es/football/player/omar-el-hilali/1064026',photo:playerImage('1064026')},
+ {n:4,name:'Urko',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/urko-gonzalez/1064009',photo:playerImage('1064009')},
+ {n:8,name:'Edu Expósito',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/edu-exposito/877262',photo:playerImage('877262')},
+ {n:10,name:'Pol Lozano',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/pol-lozano/826010',photo:playerImage('826010')},
+ {n:20,name:'Moscardo',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/gabriel-moscardo/1485309',photo:playerImage('1485309')},
+ {n:22,name:'Cala',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/alex-calatrava/1136863',photo:playerImage('1136863')},
+ {n:26,name:'Bauza',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/rafael-bauza/1841365',photo:playerImage('1841365')},
+ {n:28,name:'Javi Hdez.',pos:'Centrocampista',sofa:'https://www.sofascore.com/es/football/player/hernandez-javier/1514913',photo:playerImage('1514913')},
+ {n:7,name:'Puado',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/javi-puado/891511',photo:playerImage('891511')},
+ {n:9,name:'Roberto',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/roberto-fernandez/1392592',photo:playerImage('1392592')},
+ {n:11,name:'Pere Milla',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/pere-milla/175185',photo:playerImage('175185')},
+ {n:15,name:'Bryan',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/bryan-zaragoza/1084730',photo:playerImage('1084730')},
+ {n:17,name:'Jofre',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/jofre/1019236',photo:playerImage('1019236')},
+ {n:18,name:'Marcos',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/marcos-fernandez/1183542',photo:playerImage('1183542')},
+ {n:19,name:'Kike G.',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/kike-garcia/84972',photo:playerImage('84972')},
+ {n:24,name:'Dolan',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/tyrhys-dolan/1063015',photo:playerImage('1063015')}
 ];
 let currentFilter='Todos';
 const grid=document.getElementById('playerGrid');
@@ -76,7 +77,7 @@ function injectPlayerImages(){
    const name=card.querySelector('h3')?.textContent?.trim();
    const data=featured.find(x=>x[0]===name);
    if(data&&!card.querySelector('.profile-photo')){
-     const img=document.createElement('img');img.className='profile-photo';img.src=`https://img.sofascore.com/api/v1/player/${data[1]}/image`;img.alt=`Foto de ${name}`;img.loading='lazy';card.prepend(img);
+     const img=document.createElement('img');img.className='profile-photo';img.src=playerImage(data[1]);img.onerror=()=>{img.onerror=null;img.src=teamImage};img.alt=`Foto de ${name}`;img.loading='lazy';card.prepend(img);
    }
  });
  const featuredSection=document.querySelector('.featured');
