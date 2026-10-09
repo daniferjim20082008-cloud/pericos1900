@@ -1,12 +1,262 @@
 [
- {"q":"¿En qué año nació el Espanyol?","options":["1899","1900","1902","1910"],"answer":1},
- {"q":"¿Qué día celebra el club su aniversario?","options":["25 de abril","18 de febrero","28 de octubre","12 de abril"],"answer":2},
- {"q":"¿Dónde se fundó el club?","options":["Universidad de Barcelona","Estadio de Sarrià","Ayuntamiento de Barcelona","Montjuïc"],"answer":0},
- {"q":"¿Cuál fue su primer título, ganado en 1903?","options":["Copa del Rey","Copa de la UEFA","Copa Macaya","Supercopa"],"answer":2},
- {"q":"¿Cuándo empezó a vestir de blanquiazul?","options":["1900","1910","1923","1940"],"answer":1},
- {"q":"¿En qué año recibió el título de Real?","options":["1909","1929","1912","1923"],"answer":2},
- {"q":"¿Qué estadio se inauguró en 1923?","options":["Montjuïc","Cornellà-El Prat","Mestalla","Sarrià"],"answer":3},
- {"q":"¿Cuándo ganó su primera Copa de España?","options":["1929","1940","1900","2000"],"answer":0},
- {"q":"¿Qué perico marcó el primer gol de la historia de la Liga?","options":["Raúl Tamudo","Pitus Prat","Ricardo Zamora","Dani Jarque"],"answer":1},
- {"q":"¿Qué ganó el equipo femenino en 2005/06?","options":["Solo la Liga","La Champions","Liga, Copa de la Reina y Copa Catalunya","Solo la Copa Catalunya"],"answer":2}
+  {
+    "q": "¿En qué año nació el Espanyol?",
+    "options": [
+      "1899",
+      "1900",
+      "1902",
+      "1910"
+    ],
+    "answer": 1,
+    "id": "q01",
+    "explanation": "El club nació en 1900.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "q": "¿Qué día celebra el club su aniversario?",
+    "options": [
+      "25 de abril",
+      "18 de febrero",
+      "28 de octubre",
+      "12 de abril"
+    ],
+    "answer": 2,
+    "id": "q02",
+    "explanation": "El aniversario se celebra el 28 de octubre.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "q": "¿Dónde se fundó el club?",
+    "options": [
+      "Universidad de Barcelona",
+      "Estadio de Sarrià",
+      "Ayuntamiento de Barcelona",
+      "Montjuïc"
+    ],
+    "answer": 0,
+    "id": "q03",
+    "explanation": "Su origen está en la Universidad de Barcelona.",
+    "source": "https://www.rcdespanyol.com/es/noticia/feliz-125-aniversario/19308"
+  },
+  {
+    "q": "¿Cuál fue su primer título, ganado en 1903?",
+    "options": [
+      "Copa del Rey",
+      "Copa de la UEFA",
+      "Copa Macaya",
+      "Supercopa"
+    ],
+    "answer": 2,
+    "id": "q04",
+    "explanation": "La Copa Macaya fue su primer título.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "q": "¿Cuándo empezó a vestir de blanquiazul?",
+    "options": [
+      "1900",
+      "1910",
+      "1923",
+      "1940"
+    ],
+    "answer": 1,
+    "id": "q05",
+    "explanation": "La camiseta blanquiazul llegó en 1910.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "q": "¿En qué año recibió el título de Real?",
+    "options": [
+      "1909",
+      "1929",
+      "1912",
+      "1923"
+    ],
+    "answer": 2,
+    "id": "q06",
+    "explanation": "El título de Real se concedió en 1912.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "q": "¿Qué estadio se inauguró en 1923?",
+    "options": [
+      "Montjuïc",
+      "Cornellà-El Prat",
+      "Mestalla",
+      "Sarrià"
+    ],
+    "answer": 3,
+    "id": "q07",
+    "explanation": "Sarrià abrió sus puertas en 1923.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "q": "¿Cuándo ganó su primera Copa de España?",
+    "options": [
+      "1929",
+      "1940",
+      "1900",
+      "2000"
+    ],
+    "answer": 0,
+    "id": "q08",
+    "explanation": "La primera Copa llegó en 1929.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "q": "¿Qué perico marcó el primer gol de la historia de la Liga?",
+    "options": [
+      "Raúl Tamudo",
+      "Pitus Prat",
+      "Ricardo Zamora",
+      "Dani Jarque"
+    ],
+    "answer": 1,
+    "id": "q09",
+    "explanation": "Pitus Prat inauguró el marcador histórico de la Liga.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "q": "¿Qué ganó el equipo femenino en 2005/06?",
+    "options": [
+      "Solo la Liga",
+      "La Champions",
+      "Liga, Copa de la Reina y Copa Catalunya",
+      "Solo la Copa Catalunya"
+    ],
+    "answer": 2,
+    "id": "q10",
+    "explanation": "El femenino completó ese triplete en 2005/06.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q11",
+    "q": "¿Qué portero debutó en el Espanyol en 1916?",
+    "options": [
+      "Ricardo Zamora",
+      "Thomas N’Kono",
+      "Carlos Kameni",
+      "Dmitrović"
+    ],
+    "answer": 0,
+    "explanation": "Zamora debutó el 22 de abril de 1916.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q12",
+    "q": "¿En qué año nació el Espanyol Femenino?",
+    "options": [
+      "1960",
+      "1971",
+      "1982",
+      "1997"
+    ],
+    "answer": 1,
+    "explanation": "El femenino nació en 1971.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q13",
+    "q": "¿En qué Mundial fue sede Sarrià?",
+    "options": [
+      "México 1986",
+      "Italia 1990",
+      "España 1982",
+      "Francia 1998"
+    ],
+    "answer": 2,
+    "explanation": "Sarrià acogió partidos del Mundial de España 1982.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q14",
+    "q": "¿A qué estadio se trasladó el equipo tras dejar Sarrià?",
+    "options": [
+      "Montjuïc",
+      "Mestalla",
+      "Camp Nou",
+      "La Romareda"
+    ],
+    "answer": 0,
+    "explanation": "En 1997 el equipo se mudó a Montjuïc.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q15",
+    "q": "¿Qué título ganó el Espanyol masculino en mayo de 2000?",
+    "options": [
+      "La Liga",
+      "La Copa del Rey",
+      "La UEFA",
+      "La Supercopa"
+    ],
+    "answer": 1,
+    "explanation": "La Copa de 2000 llegó sesenta años después de la anterior.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q16",
+    "q": "¿Dónde ganó la Copa del Rey de 2006?",
+    "options": [
+      "Mestalla",
+      "Montjuïc",
+      "Santiago Bernabéu",
+      "Sarrià"
+    ],
+    "answer": 2,
+    "explanation": "La final de 2006 se disputó en el Bernabéu.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q17",
+    "q": "¿Qué competición europea terminó como subcampeón en 2007?",
+    "options": [
+      "Champions League",
+      "Recopa",
+      "Copa de la UEFA",
+      "Intertoto"
+    ],
+    "answer": 2,
+    "explanation": "El club llegó a la final de la UEFA de 2007.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q18",
+    "q": "¿En qué año se inauguró el nuevo estadio de Cornellà-El Prat?",
+    "options": [
+      "1997",
+      "2000",
+      "2006",
+      "2009"
+    ],
+    "answer": 3,
+    "explanation": "El nuevo estadio se inauguró en agosto de 2009.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q19",
+    "q": "¿Qué trofeo creó el club en 1974?",
+    "options": [
+      "Trofeo Ciutat de Barcelona",
+      "Copa Macaya",
+      "Trofeo Joan Gamper",
+      "Copa del Rey"
+    ],
+    "answer": 0,
+    "explanation": "El Trofeo Ciutat de Barcelona nació en 1974.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  },
+  {
+    "id": "q20",
+    "q": "¿En qué temporada ascendió de nuevo tras el año de la pandemia?",
+    "options": [
+      "2018/19",
+      "2019/20",
+      "2020/21",
+      "2022/23"
+    ],
+    "answer": 2,
+    "explanation": "El retorno a Primera se produjo en 2020/21.",
+    "source": "https://www.rcdespanyol.com/es/historia"
+  }
 ]
