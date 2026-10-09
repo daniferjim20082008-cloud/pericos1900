@@ -35,13 +35,13 @@ async function resolveCommonsPhoto(fullName){
   const s=`https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(fullName)}&language=en&format=json&origin=*&limit=8`;
   const sr=await fetch(s).then(r=>r.json());
   const candidates=(sr.search||[]);
-  const pick=candidates.find(x=>/football|soccer|futbol|fútbol/i.test(`${x.description||''}`))||candidates[0];
+  const pick=candidates.find(x=>/football|soccer|futbol|fútbol/i.test(`${x.description||''}`));
   if(!pick) throw new Error('no wikidata');
   const e=`https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${pick.id}&props=claims&format=json&origin=*`;
   const er=await fetch(e).then(r=>r.json());
   const file=er.entities?.[pick.id]?.claims?.P18?.[0]?.mainsnak?.datavalue?.value;
   if(!file) throw new Error('no P18');
-  const url=`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=420`;
+  const url=`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=640`;
   imageCache.set(fullName,url);return url;
  }catch(e){imageCache.set(fullName,teamImage);return teamImage;}
 }
@@ -52,7 +52,7 @@ const search=document.getElementById('searchPlayer');
 function card(p){
  const safe=p.name.replaceAll('"','&quot;');
  const escaped=p.name.replaceAll("'","\\'");
- return `<article class="player" data-name="${safe}"><div class="num">${p.n}</div><div class="player-head"><img class="player-photo" data-player="${safe}" src="${teamImage}" alt="Foto de ${p.full}" loading="lazy"><div class="player-copy"><span class="role">${p.pos}</span><h3>${p.name}</h3><p class="mini">Dorsal ${p.n} · plantilla oficial</p></div></div><div class="player-actions"><button class="tiny" onclick="openPlayer('${escaped}')">Ver ficha</button><a class="tiny" href="${p.sofa}" target="_blank" rel="noopener">Datos ↗</a></div></article>`;
+ return `<article class="player" data-name="${safe}"><div class="num">${p.n}</div><div class="player-head"><div class="portrait-frame"><img class="player-photo" data-player="${safe}" src="${teamImage}" alt="Retrato de ${p.full}, cuando esté disponible" loading="lazy" decoding="async"><span class="portrait-number">${p.n}</span></div><div class="player-copy"><span class="role">${p.pos}</span><h3>${p.name}</h3><p class="mini">Dorsal ${p.n} · plantilla oficial</p></div></div><div class="player-actions"><button class="tiny" onclick="openPlayer('${escaped}')">Ver ficha</button><a class="tiny" href="${p.sofa}" target="_blank" rel="noopener">Datos ↗</a></div></article>`;
 }
 async function hydrateVisiblePhotos(list){
  await Promise.allSettled(list.map(async p=>{
@@ -100,7 +100,7 @@ async function injectFeaturedPhotos(){
  const map={'Javi Puado':'Javi Puado','Edu Expósito':'Edu Expósito','Roberto Fernández':'Roberto Fernández Jaén','Marko Dmitrović':'Marko Dmitrović'};
  document.querySelectorAll('.profile').forEach(async card=>{
   const name=card.querySelector('h3')?.textContent?.trim(); const full=map[name]; if(!full||card.querySelector('.profile-photo'))return;
-  const img=document.createElement('img');img.className='profile-photo';img.src=teamImage;img.alt=`Foto de ${full}`;img.loading='lazy';card.prepend(img);
+  const img=document.createElement('img');img.className='profile-photo';img.decoding='async';img.src=teamImage;img.alt=`Foto de ${full}`;img.loading='lazy';card.prepend(img);
   const url=await resolveCommonsPhoto(full);img.src=url;img.onerror=()=>{img.onerror=null;img.src=teamImage};
  });
  const featured=document.querySelector('.featured');
@@ -119,3 +119,11 @@ function injectRadar(){
 }
 
 injectStyles();render();injectFeaturedPhotos();injectRadar();
+
+// Navegación móvil accesible y control de foco del diálogo.
+(function enhanceUX(){
+ const nav=document.querySelector('.navlinks');const bar=document.querySelector('.nav');
+ if(nav&&bar){const toggle=document.createElement('button');toggle.className='menu-toggle';toggle.type='button';toggle.textContent='Menú ☰';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','main-navigation');nav.id='main-navigation';bar.insertBefore(toggle,nav);toggle.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'Cerrar ×':'Menú ☰'});nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.textContent='Menú ☰'}})}
+ const dialog=document.querySelector('.modal-card');if(dialog){dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-labelledby','mName')}
+ const oldOpen=openPlayer;openPlayer=async function(name){await oldOpen(name);document.getElementById('closeModal').focus()};
+})();
