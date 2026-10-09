@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Actualizar automáticamente Liga 1900
+      - name: Actualizar automáticamente LALIGA TOTAL
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/update_laliga.py
