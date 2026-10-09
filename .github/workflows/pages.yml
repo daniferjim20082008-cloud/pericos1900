@@ -1,4 +1,4 @@
-name: Deploy static content to Pages
+name: Deploy LALIGA TOTAL to Pages
 
 on:
   push:
@@ -23,6 +23,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,7 +36,7 @@ jobs:
       - name: Actualizar automáticamente LALIGA TOTAL
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python scripts/update_laliga.py
+        run: python scripts/update_laliga_total.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
