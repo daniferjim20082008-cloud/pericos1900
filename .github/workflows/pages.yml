@@ -33,10 +33,14 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Actualizar automáticamente LALIGA TOTAL
+      - name: Actualizar LALIGA TOTAL · proveedor principal
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/update_laliga_total.py
+
+      - name: Completar datos con respaldo ESPN
+        run: python scripts/update_laliga_espn.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
