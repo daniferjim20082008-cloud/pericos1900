@@ -1,15 +1,12 @@
-name: Deploy LALIGA TOTAL to Pages
+name: Deploy Pericos 1900 to Pages
 
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
-  schedule:
-    - cron: "17 */6 * * *"
 
 permissions:
   contents: read
-  issues: write
   pages: write
   id-token: write
 
@@ -23,29 +20,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Actualizar LALIGA TOTAL · proveedor principal
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python scripts/update_laliga_total.py
-
-      - name: Completar datos con respaldo ESPN
-        run: python scripts/update_laliga_espn.py
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
