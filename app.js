@@ -1,4 +1,3 @@
-const teamImage="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Crect width='320' height='320' rx='34' fill='%23eef5ff'/%3E%3Cpath d='M0 0h64v320H0zm128 0h64v320h-64zm128 0h64v320h-64z' fill='%230a55c7' opacity='.95'/%3E%3Ccircle cx='160' cy='160' r='82' fill='white' stroke='%2306162f' stroke-width='10'/%3E%3Ctext x='160' y='178' text-anchor='middle' font-family='Arial,sans-serif' font-size='52' font-weight='700' fill='%230a55c7'%3ERCDE%3C/text%3E%3C/svg%3E";
 const official='https://www.rcdespanyol.com/es/equipos/rcd-espanyol/1';
 const players=[
  {n:1,name:'Àngel Fortuño',full:'Àngel Fortuño',pos:'Portero',sofa:'https://www.sofascore.com/es/football/player/angel-fortuno/1082734'},
@@ -28,44 +27,20 @@ const players=[
  {n:24,name:'Dolan',full:'Tyrhys Dolan',pos:'Delantero',sofa:'https://www.sofascore.com/es/football/player/tyrhys-dolan/1063015'}
 ];
 
-const imageCache=new Map();
-async function resolveCommonsPhoto(fullName){
- if(imageCache.has(fullName)) return imageCache.get(fullName);
- try{
-  const s=`https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(fullName)}&language=en&format=json&origin=*&limit=8`;
-  const sr=await fetch(s).then(r=>r.json());
-  const candidates=(sr.search||[]);
-  const pick=candidates.find(x=>/football|soccer|futbol|fútbol/i.test(`${x.description||''}`));
-  if(!pick) throw new Error('no wikidata');
-  const e=`https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${pick.id}&props=claims&format=json&origin=*`;
-  const er=await fetch(e).then(r=>r.json());
-  const file=er.entities?.[pick.id]?.claims?.P18?.[0]?.mainsnak?.datavalue?.value;
-  if(!file) throw new Error('no P18');
-  const url=`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=640`;
-  imageCache.set(fullName,url);return url;
- }catch(e){imageCache.set(fullName,teamImage);return teamImage;}
-}
-
 let currentFilter='Todos';
 const grid=document.getElementById('playerGrid');
 const search=document.getElementById('searchPlayer');
 function card(p){
  const safe=p.name.replaceAll('"','&quot;');
  const escaped=p.name.replaceAll("'","\\'");
- return `<article class="player" data-name="${safe}"><div class="num">${p.n}</div><div class="player-head"><div class="portrait-frame"><img class="player-photo" data-player="${safe}" src="${teamImage}" alt="Retrato de ${p.full}, cuando esté disponible" loading="lazy" decoding="async"><span class="portrait-number">${p.n}</span></div><div class="player-copy"><span class="role">${p.pos}</span><h3>${p.name}</h3><p class="mini">Dorsal ${p.n} · plantilla oficial</p></div></div><div class="player-actions"><button class="tiny" onclick="openPlayer('${escaped}')">Ver ficha</button><a class="tiny" href="${p.sofa}" target="_blank" rel="noopener">Datos ↗</a></div></article>`;
-}
-async function hydrateVisiblePhotos(list){
- await Promise.allSettled(list.map(async p=>{
-  const url=await resolveCommonsPhoto(p.full);
-  document.querySelectorAll(`img[data-player="${CSS.escape(p.name)}"]`).forEach(img=>{img.src=url;img.onerror=()=>{img.onerror=null;img.src=teamImage};});
- }));
+ return `<article class="player" data-name="${safe}"><div class="num">${p.n}</div><div class="player-head"><div class="portrait-frame"><img class="player-photo" data-player="${safe}" src="${playerAvatar(p)}" alt="Figura ilustrada con el dorsal ${p.n} de ${p.full}" loading="lazy" decoding="async"><span class="portrait-number">${p.n}</span></div><div class="player-copy"><span class="role">${p.pos}</span><h3>${p.name}</h3><p class="mini">Dorsal ${p.n} · plantilla oficial</p></div></div><div class="player-actions"><button class="tiny" onclick="openPlayer('${escaped}')">Ver ficha</button><a class="tiny" href="${p.sofa}" target="_blank" rel="noopener">Datos ↗</a></div></article>`;
 }
 function render(){
  const q=search.value.trim().toLowerCase();
  const list=players.filter(p=>(currentFilter==='Todos'||p.pos===currentFilter)&&p.name.toLowerCase().includes(q));
  grid.innerHTML=list.map(card).join('');
  if(!list.length) grid.innerHTML='<p style="color:#6c7d95">No hay jugadores que coincidan con la búsqueda.</p>';
- else hydrateVisiblePhotos(list);
+
 }
 document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentFilter=b.dataset.filter;render()}));
 search.addEventListener('input',render);
@@ -82,9 +57,9 @@ async function openPlayer(name){
  document.getElementById('mSofa').href=p.sofa;
  let photo=document.getElementById('mPhoto');
  if(!photo){photo=document.createElement('img');photo.id='mPhoto';photo.className='modal-photo';modal.querySelector('.modal-top').insertAdjacentElement('afterend',photo)}
- photo.src=teamImage; photo.alt=`Foto de ${p.full}`;
+ photo.src=playerAvatar(p); photo.alt=`Figura ilustrada con el dorsal ${p.n} de ${p.full}`;
  modal.classList.add('open');modal.setAttribute('aria-hidden','false');
- const url=await resolveCommonsPhoto(p.full); photo.src=url; photo.onerror=()=>{photo.onerror=null;photo.src=teamImage};
+
 }
 function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
 document.getElementById('closeModal').addEventListener('click',closeModal);
@@ -100,11 +75,11 @@ async function injectFeaturedPhotos(){
  const map={'Javi Puado':'Javi Puado','Edu Expósito':'Edu Expósito','Roberto Fernández':'Roberto Fernández Jaén','Marko Dmitrović':'Marko Dmitrović'};
  document.querySelectorAll('.profile').forEach(async card=>{
   const name=card.querySelector('h3')?.textContent?.trim(); const full=map[name]; if(!full||card.querySelector('.profile-photo'))return;
-  const img=document.createElement('img');img.className='profile-photo';img.decoding='async';img.src=teamImage;img.alt=`Foto de ${full}`;img.loading='lazy';card.prepend(img);
-  const url=await resolveCommonsPhoto(full);img.src=url;img.onerror=()=>{img.onerror=null;img.src=teamImage};
+  const img=document.createElement('img');img.className='profile-photo';img.decoding='async';img.src=playerAvatar(players.find(p=>p.full===full));img.alt=`Figura ilustrada de ${full}`;img.loading='lazy';card.prepend(img);
+
  });
  const featured=document.querySelector('.featured');
- if(featured){featured.id='galeria';const tag=featured.querySelector('.tag');if(tag)tag.textContent='El equipo en imágenes';}
+ if(featured){featured.id='galeria';const tag=featured.querySelector('.tag');if(tag)tag.textContent='Figuras blanquiazules';}
  const nav=document.querySelector('.navlinks');if(nav&&!nav.querySelector('a[href="#galeria"]')){const a=document.createElement('a');a.href='#galeria';a.textContent='Galería';nav.appendChild(a)}
 }
 
@@ -127,3 +102,4 @@ injectStyles();render();injectFeaturedPhotos();injectRadar();
  const dialog=document.querySelector('.modal-card');if(dialog){dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-labelledby','mName')}
  const oldOpen=openPlayer;openPlayer=async function(name){await oldOpen(name);document.getElementById('closeModal').focus()};
 })();
+

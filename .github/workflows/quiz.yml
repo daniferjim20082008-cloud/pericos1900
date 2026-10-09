@@ -1,0 +1,27 @@
+name: Corregir quiz y actualizar ranking
+on:
+  issues:
+    types: [opened, edited, deleted, reopened, closed]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['questions.json', 'scripts/score_quiz.py', '.github/workflows/quiz.yml']
+permissions:
+  contents: write
+  issues: read
+concurrency:
+  group: pericos-quiz-ranking
+  cancel-in-progress: false
+jobs:
+  score:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || startsWith(github.event.issue.title, '[Quiz Pericos 1900]') || github.event.action == 'edited'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Recalcular todas las partidas desde identidades de GitHub
+        run: python3 scripts/score_quiz.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

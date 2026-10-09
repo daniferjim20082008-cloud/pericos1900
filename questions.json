@@ -1,0 +1,12 @@
+[
+ {"q":"¿En qué año nació el Espanyol?","options":["1899","1900","1902","1910"],"answer":1},
+ {"q":"¿Qué día celebra el club su aniversario?","options":["25 de abril","18 de febrero","28 de octubre","12 de abril"],"answer":2},
+ {"q":"¿Dónde se fundó el club?","options":["Universidad de Barcelona","Estadio de Sarrià","Ayuntamiento de Barcelona","Montjuïc"],"answer":0},
+ {"q":"¿Cuál fue su primer título, ganado en 1903?","options":["Copa del Rey","Copa de la UEFA","Copa Macaya","Supercopa"],"answer":2},
+ {"q":"¿Cuándo empezó a vestir de blanquiazul?","options":["1900","1910","1923","1940"],"answer":1},
+ {"q":"¿En qué año recibió el título de Real?","options":["1909","1929","1912","1923"],"answer":2},
+ {"q":"¿Qué estadio se inauguró en 1923?","options":["Montjuïc","Cornellà-El Prat","Mestalla","Sarrià"],"answer":3},
+ {"q":"¿Cuándo ganó su primera Copa de España?","options":["1929","1940","1900","2000"],"answer":0},
+ {"q":"¿Qué perico marcó el primer gol de la historia de la Liga?","options":["Raúl Tamudo","Pitus Prat","Ricardo Zamora","Dani Jarque"],"answer":1},
+ {"q":"¿Qué ganó el equipo femenino en 2005/06?","options":["Solo la Liga","La Champions","Liga, Copa de la Reina y Copa Catalunya","Solo la Copa Catalunya"],"answer":2}
+]

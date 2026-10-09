@@ -1,0 +1,7 @@
+// Figuras genéricas propias: el dorsal identifica al jugador, no pretende ser un retrato.
+function playerAvatar(p) {
+ const blue = p.pos === 'Portero' ? '#11a88a' : '#0a55c7';
+ const hair = ['#18253d','#53392e','#bc874c'][p.n % 3];
+ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" rx="28" fill="#eaf3ff"/><circle cx="248" cy="70" r="100" fill="#d0e3ff"/><path d="M0 275 320 180v140H0" fill="#c1dcff"/><ellipse cx="160" cy="298" rx="82" ry="10" fill="#aecdf0"/><g stroke="#12213a" stroke-width="5" stroke-linejoin="round"><path d="m119 188-37 61 24 13 35-47m60-27 37 61-24 13-35-47" fill="#efbf99"/><path d="m123 173-24 40 28 14-6 52h78l-6-52 28-14-24-40-22-8h-30z" fill="${blue}"/><path d="M144 173v104h31V173" fill="white" stroke="none"/><path d="M123 279h75l-5 18h-31l-3-13-3 13h-30z" fill="#12213a"/><rect x="146" y="146" width="28" height="30" rx="10" fill="#efbf99"/><ellipse cx="160" cy="112" rx="47" ry="54" fill="#efbf99"/><path d="M112 99q-4-52 47-52 53 0 50 55l-21-26q-30 20-61 8z" fill="${hair}"/><path d="M147 132q13 12 26 0" fill="none" stroke-linecap="round"/><path d="M139 108v3m42-3v3" stroke-width="7" stroke-linecap="round"/></g><text x="160" y="239" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="bold" fill="#06162f">${p.n}</text><circle cx="241" cy="279" r="22" fill="white" stroke="#12213a" stroke-width="4"/><path d="m241 267 11 8-4 13h-14l-4-13z" fill="#12213a"/></svg>`;
+ return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+}
