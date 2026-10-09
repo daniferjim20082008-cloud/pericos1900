@@ -3,15 +3,16 @@
 
   const D = window.LIGA_DATA || {};
   const teams = D.teams || {};
-  let live = { events: [], teamIds: {}, squads: {}, teamExtras: {} };
+  let live = { events: [], teamIds: {}, teamLogos: {}, squads: {}, teamExtras: {} };
   let lastPlayer = null;
   let lastTeam = null;
 
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const teamName = code => teams[code]?.short || teams[code]?.name || code;
   const finished = e => e && e.homeScore != null && e.awayScore != null;
-  const crestUrl = code => live.teamIds?.[code] ? `https://api.sofascore.app/api/v1/team/${live.teamIds[code]}/image` : "";
-  const playerPhoto = id => id ? `https://api.sofascore.app/api/v1/player/${id}/image` : "";
+  const crestUrl = code => live.teamLogos?.[code] || (live.teamIds?.[code] ? `https://api.sofascore.app/api/v1/team/${live.teamIds[code]}/image` : "");
+  const playerById = (code,id) => (live.squads?.[code] || []).find(p => String(p.id) === String(id));
+  const playerPhoto = (id,code) => playerById(code,id)?.photo || (id ? `https://a.espncdn.com/i/headshots/soccer/players/full/${id}.png` : "");
 
   function calcSplit(code) {
     const split = {
@@ -113,8 +114,8 @@
     document.querySelectorAll(".player-card[data-player]").forEach(card => {
       if (card.querySelector(".player-photo-enhanced")) return;
       const id = card.dataset.player, code = card.dataset.team;
-      const player = (live.squads?.[code] || []).find(p => String(p.id) === String(id));
-      const photo = playerPhoto(id); if (!photo) return;
+      const player = playerById(code,id);
+      const photo = playerPhoto(id,code); if (!photo) return;
       const frame = document.createElement("span");
       frame.className = "player-photo-frame";
       frame.innerHTML = `<img class="player-photo-enhanced" src="${photo}" alt="${esc(player?.name || "Jugador")}" loading="lazy"><em>${player?.jerseyNumber ?? ""}</em>`;
@@ -126,7 +127,7 @@
     const detailHero = document.querySelector("#detail-content .detail-hero");
     if (detailHero && lastPlayer && !detailHero.querySelector(".player-detail-photo")) {
       const img = document.createElement("img");
-      img.className = "player-detail-photo"; img.src = playerPhoto(lastPlayer.id); img.alt = "Foto del jugador";
+      img.className = "player-detail-photo"; img.src = playerPhoto(lastPlayer.id,lastPlayer.team); img.alt = "Foto del jugador";
       img.addEventListener("error", () => img.remove(), {once:true});
       const pos = detailHero.querySelector(".player-big-pos");
       if (pos) pos.replaceWith(img); else detailHero.prepend(img);
@@ -144,8 +145,13 @@
     panel.innerHTML = `<h3>🏠 Rendimiento local / visitante</h3><p class="split-intro">Puntos reales conseguidos esta temporada según los partidos finalizados.</p><div class="split-grid"><div class="split-card home"><strong>Como local</strong><b>${h.pts} pts</b><small>${h.p} PJ · ${h.w}V ${h.d}E ${h.l}D · ${h.gf}-${h.ga}</small></div><div class="split-card away"><strong>Como visitante</strong><b>${a.pts} pts</b><small>${a.p} PJ · ${a.w}V ${a.d}E ${a.l}D · ${a.gf}-${a.ga}</small></div></div>`;
   }
 
+  function updateGeneralForum() {
+    const link = document.getElementById("general-forum-link");
+    if (link && D.repo) link.href = `https://github.com/${D.repo}/issues`;
+  }
+
   function refreshDecorations() {
-    decorateTeams(); decoratePlayers(); patchClubSplit();
+    decorateTeams(); decoratePlayers(); patchClubSplit(); updateGeneralForum();
   }
 
   document.addEventListener("click", e => {
