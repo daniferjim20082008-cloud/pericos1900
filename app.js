@@ -103,3 +103,16 @@ injectStyles();render();injectFeaturedPhotos();injectRadar();
  const oldOpen=openPlayer;openPlayer=async function(name){await oldOpen(name);document.getElementById('closeModal').focus()};
 })();
 
+
+
+// Parte de partido contrastado: 9 de octubre de 2026. No se presenta como feed automático.
+(function showVerifiedMatch(){
+ const anchor=document.getElementById('partidos')||document.getElementById('radar');
+ if(!anchor)return;
+ const box=document.createElement('section');
+ box.id='pericos-live-match-20261009';
+ box.setAttribute('aria-label','Seguimiento del partido');
+ box.style.cssText='max-width:1120px;margin:20px auto;padding:20px 24px;background:#eef5ff;border:2px solid #0a55c7;border-radius:20px;color:#06162f';
+ box.innerHTML='<span style="font-weight:800;color:#0a55c7">🔴 EN DIRECTO · LALIGA J8 · 9 OCT 2026</span><h2 style="margin:10px 0">Málaga CF 0–0 RCD Espanyol</h2><p style="margin:8px 0">Minuto aproximado 11 al consultar a las 21:12 (hora peninsular). Inicio confirmado a las 21:01. Último marcador comprobable: 0–0 a las 21:05; no hay goles ni incidencias decisivas confirmadas en la información consultada.</p><p style="margin:8px 0;font-size:13px">Este marcador es una instantánea verificada, no una retransmisión automática. Puede haber cambiado.</p><a href="https://www.europapress.es/deportes/partidos-en-directo/noticia-malaga-espanyol-directo-hoy-sigue-partido-laliga-ea-sports-minuto-minuto-20261009200055.html" target="_blank" rel="noopener noreferrer">Seguir marcador y eventos actualizados ↗</a> · <a href="https://www.laliga.com/en-GB/match/temporada-2026-2027-laliga-ea-sports-malaga-cf-rcd-espanyol-de-barcelona-8" target="_blank" rel="noopener noreferrer">Ficha de LALIGA ↗</a>';
+ anchor.parentNode.insertBefore(box,anchor);
+})();
