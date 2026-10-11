@@ -83,7 +83,7 @@ async function injectFeaturedPhotos(){
  const nav=document.querySelector('.navlinks');if(nav&&!nav.querySelector('a[href="#galeria"]')){const a=document.createElement('a');a.href='#galeria';a.textContent='Galería';nav.appendChild(a)}
 }
 
-const radarData={updated:'8 OCT 2026',record:'1V · 1E · 3D',goals:'6 GF · 8 GC',streak:'2 derrotas seguidas',next:'Málaga CF — RCD Espanyol',nextMeta:'9 OCT · 21:00 · La Rosaleda',results:[{r:'D',score:'Real Sociedad 2–1 Espanyol'},{r:'E',score:'Espanyol 1–1 Sevilla'},{r:'V',score:'Osasuna 0–2 Espanyol'},{r:'D',score:'Rayo Vallecano 2–1 Espanyol'},{r:'D',score:'Espanyol 1–3 Elche'}]};
+const radarData={updated:'9 OCT 2026 · TRAS J8',record:'1V · 2E · 2D',goals:'6 GF · 7 GC',streak:'Empate tras 2 derrotas',next:'RCD Espanyol — Atlético de Madrid',nextMeta:'17 OCT · 14:00 · RCDE Stadium',results:[{r:'E',score:'Espanyol 1–1 Sevilla'},{r:'V',score:'Osasuna 0–2 Espanyol'},{r:'D',score:'Rayo Vallecano 2–1 Espanyol'},{r:'D',score:'Espanyol 1–3 Elche'},{r:'E',score:'Málaga 1–1 Espanyol'}]};
 function injectRadar(){
  const squad=document.querySelector('.squad');if(!squad||document.getElementById('radar'))return;
  const section=document.createElement('section');section.id='radar';section.className='radar-section';
@@ -101,18 +101,4 @@ injectStyles();render();injectFeaturedPhotos();injectRadar();
  if(nav&&bar){const toggle=document.createElement('button');toggle.className='menu-toggle';toggle.type='button';toggle.textContent='Menú ☰';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','main-navigation');nav.id='main-navigation';bar.insertBefore(toggle,nav);toggle.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'Cerrar ×':'Menú ☰'});nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.textContent='Menú ☰'}})}
  const dialog=document.querySelector('.modal-card');if(dialog){dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-labelledby','mName')}
  const oldOpen=openPlayer;openPlayer=async function(name){await oldOpen(name);document.getElementById('closeModal').focus()};
-})();
-
-
-
-// Parte de partido contrastado: 9 de octubre de 2026. No se presenta como feed automático.
-(function showVerifiedMatch(){
- const anchor=document.getElementById('partidos')||document.getElementById('radar');
- if(!anchor)return;
- const box=document.createElement('section');
- box.id='pericos-live-match-20261009';
- box.setAttribute('aria-label','Seguimiento del partido');
- box.style.cssText='max-width:1120px;margin:20px auto;padding:20px 24px;background:#eef5ff;border:2px solid #0a55c7;border-radius:20px;color:#06162f';
- box.innerHTML='<span style="font-weight:800;color:#0a55c7">🔴 EN DIRECTO · LALIGA J8 · 9 OCT 2026</span><h2 style="margin:10px 0">Málaga CF 0–0 RCD Espanyol</h2><p style="margin:8px 0">Minuto aproximado 11 al consultar a las 21:12 (hora peninsular). Inicio confirmado a las 21:01. Último marcador comprobable: 0–0 a las 21:05; no hay goles ni incidencias decisivas confirmadas en la información consultada.</p><p style="margin:8px 0;font-size:13px">Este marcador es una instantánea verificada, no una retransmisión automática. Puede haber cambiado.</p><a href="https://www.europapress.es/deportes/partidos-en-directo/noticia-malaga-espanyol-directo-hoy-sigue-partido-laliga-ea-sports-minuto-minuto-20261009200055.html" target="_blank" rel="noopener noreferrer">Seguir marcador y eventos actualizados ↗</a> · <a href="https://www.laliga.com/en-GB/match/temporada-2026-2027-laliga-ea-sports-malaga-cf-rcd-espanyol-de-barcelona-8" target="_blank" rel="noopener noreferrer">Ficha de LALIGA ↗</a>';
- anchor.parentNode.insertBefore(box,anchor);
 })();
